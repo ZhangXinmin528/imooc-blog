@@ -1,1 +1,0 @@
-<view class="my-search-container data-v-09650e6b"><view class="my-search-box data-v-09650e6b"><image class="icon data-v-09650e6b" src="../static/images/search.png"></image><text class="placeholder data-v-09650e6b">{{placeholderText}}</text></view></view>
