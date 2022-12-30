@@ -108,7 +108,7 @@
 				this.activeIndex = index;
 				this.tabToIndex();
 				//发送一个通知，表示激活项发生变化
-				this.$emit('tabCLick', index);
+				this.$emit('tabClick', index);
 			},
 			//根据当前的activeIndex,计算滑块滚动
 			tabToIndex() {

@@ -3,23 +3,22 @@
 		<view class="item-box">
 			<!-- left -->
 			<view class="item-box-left">
-				<hot-ranking>
-
+				<hot-ranking :ranking="ranking">
 				</hot-ranking>
 			</view>
 			<!-- right -->
 			<view class="item-box-right">
 				<!-- 标题 -->
-				<view class="item-title">标题</view>
+				<view class="item-title line-clamp-2">{{data.title}}</view>
 				<!-- 简介 -->
-				<view class="item-desc">简介</view>
+				<view class="item-desc line-clamp-2">{{data.desc}}</view>
 				<view class="item-botom-box">
 					<!-- 作者 -->
-					<text class="item-author">作者</text>
+					<text class="item-author">{{data.nickname}}</text>
 					<!-- 热度 -->
 					<view class="hot-box">
 						<image class="hot-icon" src="../../static/images/hot-icon.png"></image>
-						<text class="hot-text">1000热度</text>
+						<text class="hot-text">{{data.views}} 热度</text>
 					</view>
 				</view>
 
@@ -31,8 +30,22 @@
 <script>
 	export default {
 		name: "hot-list-item",
+		props: {
+			//item数据
+			data: {
+				type: Object,
+				//代表必须参数
+				required: true
+			},
+			//排名
+			ranking: {
+				type: Number,
+				required: true
+			}
+		},
 		data() {
 			return {
+
 
 			};
 		}
@@ -87,16 +100,20 @@
 		color: $uni-text-color-grey;
 	}
 
-	.hot-box {}
-
-	.hot-icon {
-		width: $uni-img-size-sm;
-		height: $uni-img-size-sm;
+	.hot-box {
+		.hot-icon {
+			width: $uni-img-size-sm;
+			height: $uni-img-size-sm;
+			vertical-align: top;
+		}
+		.hot-text {
+			margin-left: $uni-spacing-row-sm;
+			font-size: $uni-font-size-sm;
+			color: $uni-text-color-hot;
+		}
 	}
 
-	.hot-text {
-		margin-left: $uni-spacing-row-sm;
-		font-size: $uni-font-size-sm;
-		color: $uni-text-color-hot;
-	}
+	
+
+	
 </style>
