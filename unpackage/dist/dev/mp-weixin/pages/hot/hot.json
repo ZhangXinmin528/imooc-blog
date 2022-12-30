@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "热搜",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "hot-list-item": "/components/hot-list-item/hot-list-item",
+    "my-searcher": "/components/my-searcher",
+    "my-tabs": "/components/my-tabs"
+  }
+}
