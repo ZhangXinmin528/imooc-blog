@@ -26,6 +26,7 @@ function request({
 				header
 			}) => {
 				if (data.success) {
+					// console.log(data.data)
 					//请求成功
 					resolve(data);
 				} else {

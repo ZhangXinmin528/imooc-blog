@@ -16,6 +16,26 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	.ranking-container {
+		position: relative;
+		text-align: center;
+		width: 18px;
+		height: 20px;
+	}
 
+	.ranking-bg {
+		width: 100%;
+		height: 100%;
+	}
+
+	.ranking-text {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-55%, -55%);
+		font-size: $uni-font-size-sm;
+		font-weight: bold;
+		color: $uni-text-color;
+	}
 </style>

@@ -9572,14 +9572,26 @@ if (hadRuntime) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getHotTabs = getHotTabs;var _request = _interopRequireDefault(__webpack_require__(/*! ../utils/request.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.getHotTabs = getHotTabs;exports.getHostListFromTabType = getHostListFromTabType;var _request = _interopRequireDefault(__webpack_require__(/*! ../utils/request.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /**
-                                                                                                                                                                                                                                                                                * 热搜文章类型
-                                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                                                                        * 热搜文章类型
+                                                                                                                                                                                                                                                                                                                                        */
 function getHotTabs() {
   return (0, _request.default)({
     url: '/hot/tabs' });
+
+}
+/**
+   * 请求热搜文章列表
+   * @param {Object} type 文章类型
+   */
+function getHostListFromTabType(type) {
+  return (0, _request.default)({
+    url: '/hot/list',
+    data: {
+      type: type } });
+
 
 }
 
@@ -9620,6 +9632,7 @@ function request(_ref)
 
       {var data = _ref2.data,statusCode = _ref2.statusCode,header = _ref2.header;
         if (data.success) {
+          // console.log(data.data)
           //请求成功
           resolve(data);
         } else {
@@ -9642,6 +9655,72 @@ function request(_ref)
 
 request;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */
+/*!**********************************************************************************************************************!*\
+  !*** /Users/zhangxinmin/Development/web/imooc-blog/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
+  \**********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 43));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 44));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 45));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+{
+  en: _en.default,
+  'zh-Hans': _zhHans.default,
+  'zh-Hant': _zhHant.default };exports.default = _default;
+
+/***/ }),
+/* 43 */
+/*!*********************************************************************************************************************!*\
+  !*** /Users/zhangxinmin/Development/web/imooc-blog/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
+  \*********************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show more\",\"uni-load-more.contentrefresh\":\"loading...\",\"uni-load-more.contentnomore\":\"No more data\"}");
+
+/***/ }),
+/* 44 */
+/*!**************************************************************************************************************************!*\
+  !*** /Users/zhangxinmin/Development/web/imooc-blog/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
+  \**************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多\",\"uni-load-more.contentrefresh\":\"正在加载...\",\"uni-load-more.contentnomore\":\"没有更多数据了\"}");
+
+/***/ }),
+/* 45 */
+/*!**************************************************************************************************************************!*\
+  !*** /Users/zhangxinmin/Development/web/imooc-blog/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
+  \**************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多\",\"uni-load-more.contentrefresh\":\"正在加載...\",\"uni-load-more.contentnomore\":\"沒有更多數據了\"}");
 
 /***/ })
 ]]);

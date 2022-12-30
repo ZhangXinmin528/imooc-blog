@@ -6,11 +6,16 @@
 		</view>
 		<view>
 			<my-tabs :tabData="tabData" :defaultIndex="currentIndex"
-				:config="{textColor:'#333333',activeTextColor:'#f94d2a'}"></my-tabs>
+				:config="{textColor:'#333333',activeTextColor:'#f94d2a'}" @tabClick="onTabClick"></my-tabs>
 		</view>
 		<!-- list视图 -->
 		<view>
-			<hot-list-item v-for="(item,index) in 50" :key="index"></hot-list-item>
+			<!-- 加载动画 -->
+			<uni-load-more status="loading" v-if="isLoading"></uni-load-more>
+			<block v-else>
+				<hot-list-item v-for="(item,index) in 50" :key="index"></hot-list-item>
+			</block>
+
 		</view>
 	</view>
 </template>
@@ -20,7 +25,8 @@
 	import MyTabs from '../../components/my-tabs.vue'
 
 	import {
-		getHotTabs
+		getHotTabs,
+		getHostListFromTabType
 	} from 'api/hot'
 
 	export default {
@@ -34,6 +40,10 @@
 				tabData: [],
 				//当前的切换Index
 				currentIndex: 0,
+				//loading
+				isLoading: true,
+				//以tab为key，以对应的list数据为value
+				listData: {}
 			};
 		},
 		//组件实现配置完成，但是DOM未渲染，进行网络请求，配置响应式数据
@@ -48,6 +58,28 @@
 
 				this.tabData = res.data.list;
 
+				//获取文章列表
+				this.loadHotListFromTab();
+			},
+			//获取文章列表数据
+			async loadHotListFromTab() {
+				console.log("loadHotListFromTab..");
+				if (!this.listData[this.currentIndex]) { //未缓存过数据
+					this.isLoading = true;
+					const id = this.tabData[this.currentIndex].id;
+					const res = await getHostListFromTabType(id);
+					// console.log(res);
+					//数据缓存
+					this.listData[this.currentIndex] = res.data.list;
+					this.isLoading = false;
+				}
+				this.isLoading = false;
+			},
+			//tab点击事件
+			onTabClick(index) {
+				console.log("onTabClick..");
+				this.currentIndex = index;
+				this.loadHotListFromTab();
 			}
 		}
 	}

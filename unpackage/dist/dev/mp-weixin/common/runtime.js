@@ -105,11 +105,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/my-searcher":1,"components/my-tabs":1};
+/******/ 		var cssChunks = {"uni_modules/uni-load-more/components/uni-load-more/uni-load-more":1,"components/hot-list-item/hot-list-item":1,"components/my-searcher":1,"components/my-tabs":1,"components/hot-ranking/hot-ranking":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/hot-list-item/hot-list-item":"components/hot-list-item/hot-list-item","components/my-searcher":"components/my-searcher","components/my-tabs":"components/my-tabs","components/hot-ranking/hot-ranking":"components/hot-ranking/hot-ranking"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"uni_modules/uni-load-more/components/uni-load-more/uni-load-more":"uni_modules/uni-load-more/components/uni-load-more/uni-load-more","components/hot-list-item/hot-list-item":"components/hot-list-item/hot-list-item","components/my-searcher":"components/my-searcher","components/my-tabs":"components/my-tabs","components/hot-ranking/hot-ranking":"components/hot-ranking/hot-ranking"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

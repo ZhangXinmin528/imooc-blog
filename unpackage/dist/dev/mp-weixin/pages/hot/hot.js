@@ -103,8 +103,11 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    uniLoadMore: function() {
+      return Promise.all(/*! import() | uni_modules/uni-load-more/components/uni-load-more/uni-load-more */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-load-more/components/uni-load-more/uni-load-more")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue */ 37))
+    },
     hotListItem: function() {
-      return __webpack_require__.e(/*! import() | components/hot-list-item/hot-list-item */ "components/hot-list-item/hot-list-item").then(__webpack_require__.bind(null, /*! @/components/hot-list-item/hot-list-item.vue */ 55))
+      return __webpack_require__.e(/*! import() | components/hot-list-item/hot-list-item */ "components/hot-list-item/hot-list-item").then(__webpack_require__.bind(null, /*! @/components/hot-list-item/hot-list-item.vue */ 48))
     }
   }
 } catch (e) {
@@ -180,7 +183,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _hot = __webpack_require__(/*! api/hot */ 21);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var MySearcher = function MySearcher() {__webpack_require__.e(/*! require.ensure | components/my-searcher */ "components/my-searcher").then((function () {return resolve(__webpack_require__(/*! ../../components/my-searcher.vue */ 37));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MyTabs = function MyTabs() {__webpack_require__.e(/*! require.ensure | components/my-tabs */ "components/my-tabs").then((function () {return resolve(__webpack_require__(/*! ../../components/my-tabs.vue */ 44));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+var _hot = __webpack_require__(/*! api/hot */ 21);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var MySearcher = function MySearcher() {__webpack_require__.e(/*! require.ensure | components/my-searcher */ "components/my-searcher").then((function () {return resolve(__webpack_require__(/*! ../../components/my-searcher.vue */ 55));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MyTabs = function MyTabs() {__webpack_require__.e(/*! require.ensure | components/my-tabs */ "components/my-tabs").then((function () {return resolve(__webpack_require__(/*! ../../components/my-tabs.vue */ 62));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
 
 
 
@@ -194,7 +203,11 @@ var _hot = __webpack_require__(/*! api/hot */ 21);function _interopRequireDefaul
       //tab数据源
       tabData: [],
       //当前的切换Index
-      currentIndex: 0 };
+      currentIndex: 0,
+      //loading
+      isLoading: true,
+      //以tab为key，以对应的list数据为value
+      listData: {} };
 
   },
   //组件实现配置完成，但是DOM未渲染，进行网络请求，配置响应式数据
@@ -207,8 +220,30 @@ var _hot = __webpack_require__(/*! api/hot */ 21);function _interopRequireDefaul
     loadHotTabs: function loadHotTabs() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   (0, _hot.getHotTabs)());case 2:res = _context.sent;
 
-                _this.tabData = res.data.list;case 4:case "end":return _context.stop();}}}, _callee);}))();
+                _this.tabData = res.data.list;
 
+                //获取文章列表
+                _this.loadHotListFromTab();case 5:case "end":return _context.stop();}}}, _callee);}))();
+    },
+    //获取文章列表数据
+    loadHotListFromTab: function loadHotListFromTab() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var id, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                console.log("loadHotListFromTab..");if (
+                _this2.listData[_this2.currentIndex]) {_context2.next = 9;break;} //未缓存过数据
+                _this2.isLoading = true;
+                id = _this2.tabData[_this2.currentIndex].id;_context2.next = 6;return (
+                  (0, _hot.getHostListFromTabType)(id));case 6:res = _context2.sent;
+                // console.log(res);
+                //数据缓存
+                _this2.listData[_this2.currentIndex] = res.data.list;
+                _this2.isLoading = false;case 9:
+
+                _this2.isLoading = false;case 10:case "end":return _context2.stop();}}}, _callee2);}))();
+    },
+    //tab点击事件
+    onTabClick: function onTabClick(index) {
+      console.log("onTabClick..");
+      this.currentIndex = index;
+      this.loadHotListFromTab();
     } } };exports.default = _default;
 
 /***/ }),
