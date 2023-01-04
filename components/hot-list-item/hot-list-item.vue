@@ -18,7 +18,7 @@
 					<!-- 热度 -->
 					<view class="hot-box">
 						<image class="hot-icon" src="../../static/images/hot-icon.png"></image>
-						<text class="hot-text">{{data.views}} 热度</text>
+						<text class="hot-text">{{data.views | hotNumber}} 热度</text>
 					</view>
 				</view>
 
@@ -106,14 +106,11 @@
 			height: $uni-img-size-sm;
 			vertical-align: top;
 		}
+
 		.hot-text {
 			margin-left: $uni-spacing-row-sm;
 			font-size: $uni-font-size-sm;
 			color: $uni-text-color-hot;
 		}
 	}
-
-	
-
-	
 </style>

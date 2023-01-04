@@ -50,5 +50,17 @@
 			"selectedIconPath": "static/tab-icons/my-active.png"
 
 		}]
-	}
+	},
+	//分包：提升性能；优化小程序首次启动下载时间；团队解耦；
+	"subPackages": [{
+		"root": "subpkg",
+		"name": "sub-1",
+		"pages": [{
+			"path": "pages/search-blog/search-blog",
+			"style": {
+				"navigationBarTitleText": "文章搜索",
+				"enablePullDownRefresh": false
+			}
+		}]
+	}]
 }

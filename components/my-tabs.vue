@@ -105,6 +105,7 @@
 			},
 			//tabitem的点击事件
 			onTabClick(index) {
+				// console.log("onTabClick0", index);
 				this.activeIndex = index;
 				this.tabToIndex();
 				//发送一个通知，表示激活项发生变化
@@ -112,6 +113,9 @@
 			},
 			//根据当前的activeIndex,计算滑块滚动
 			tabToIndex() {
+				if (this.tabList.length === 0)
+					return;
+
 				const index = this.activeIndex;
 				//计算滑块滚动
 				this.slider = {
@@ -157,6 +161,8 @@
 				//当defaultIndex发生变化时的回调方法
 				handler(val) {
 					this.activeIndex = val;
+					//需要重新计算滑块位置
+					this.tabToIndex();
 				},
 				//表示当前的回调将会在侦听开始之后立即被调用
 				immediate: true
