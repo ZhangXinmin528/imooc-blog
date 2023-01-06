@@ -72,7 +72,7 @@
 			},
 			//搜索内容
 			onSearchConfirm(val) {
-				console.log('搜索内容。。' + this.val);
+				console.log('搜索内容。。' + val);
 				//没有输入搜索内容，则使用推荐文本
 				this.searchVal = val ? val : this.defaultText;
 				//当用户输入包含内容时
