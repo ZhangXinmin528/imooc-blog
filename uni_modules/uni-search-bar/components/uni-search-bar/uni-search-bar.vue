@@ -283,7 +283,7 @@
 	.uni-searchbar__text-placeholder {
 		font-size: 14px;
 		color: #B3B3B3;
-		margin-left: 5px;
+		margin-bottom: 1px;
 	}
 
 	.uni-searchbar__cancel {
