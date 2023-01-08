@@ -1,4 +1,5 @@
 <template>
+	<!-- 热搜列表 -->
 	<view class="search-hot_list-container">
 		<view class="search-hot-title">慕课热搜 - 全网技术，一网打尽</view>
 		<!-- 列表 -->

@@ -2,8 +2,8 @@
 	<!-- 搜索输入框 -->
 	<view class="my-search-container">
 		<uni-search-bar v-if="isShowInput" class="my-search-bar" :radius="100" :bgColor="config.backgroundColor"
-			:placeholder="placeholderText" value="value" @confirm="onSearch" @focus="onFocus" @blur="onBlur"
-			@clear="onClear" @cancel="onCancel" @input="onInput">
+			:placeholder="placeholderText" @confirm="onSearch" @focus="onFocus" @blur="onBlur" @clear="onClear"
+			@cancel="onCancel" @input="onInput" :value="value">
 
 			<uni-icons slot="clearIcon" type="clear" color="#999999"></uni-icons>
 		</uni-search-bar>

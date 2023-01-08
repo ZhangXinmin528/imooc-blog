@@ -10,6 +10,15 @@
 	-webkit-box-orient:vertical;
 	-webkit-line-clamp:2;
 }
+
+//单行展示
+.line-clamp{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+//卡片样式
 .card{
 	border: 1px solid #f9f9f9;
 	border-radius: 5px;
