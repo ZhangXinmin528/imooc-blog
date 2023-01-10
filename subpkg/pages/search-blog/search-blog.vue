@@ -17,7 +17,7 @@
 
 		<!-- 热搜历史 -->
 		<view class="search-history-box" v-else-if="showType === SEARCH_HISTORY">
-			<search-history></search-history>
+			<search-history @onItemClick="onSearchConfirm"></search-history>
 		</view>
 
 		<!-- 搜索结果 -->
@@ -33,6 +33,10 @@
 	import {
 		getDefaultText
 	} from '../../../api/search.js'
+
+	import {
+		mapMutations
+	} from "vuex";
 
 	//热搜列表
 	const HOT_LIST = '0'
@@ -65,6 +69,7 @@
 			this.loadDefaultText();
 		},
 		methods: {
+			...mapMutations('search', ['addSearchData']),
 			//获取推荐搜索文本
 			async loadDefaultText() {
 				const res = await getDefaultText();
@@ -74,7 +79,10 @@
 			onSearchConfirm(val) {
 				console.log('搜索内容。。' + val);
 				//没有输入搜索内容，则使用推荐文本
+
 				this.searchVal = val ? val : this.defaultText;
+				//保存搜索关键词
+				this.addSearchData(this.searchVal);
 				//当用户输入包含内容时
 				if (this.searchVal) {
 					this.showType = SEARCH_RESULT;

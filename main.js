@@ -3,6 +3,8 @@ import App from './App'
 // #ifndef VUE3
 import Vue from 'vue'
 
+//导入store实例
+import store from './store'
 //引入公共样式
 import './styles/global.scss';
 
@@ -16,7 +18,9 @@ Object.keys(filters).forEach((key) => {
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
-	...App
+	...App,
+	//挂载实例
+	store,
 })
 app.$mount()
 // #endif
