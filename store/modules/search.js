@@ -1,4 +1,7 @@
 const STORAGE_KEY = 'search-list';
+//允许缓存十条
+const HISTORY_MAX = 10;
+
 //数据持久化
 //1.数据的保存
 //2.数据的读取
@@ -40,6 +43,11 @@ export default {
 			}
 			//添加数据
 			state.searchData.unshift(val);
+
+			//处理数据量限制
+			if (state.searchData.length > HISTORY_MAX) {
+				state.searchData.splice(HISTORY_MAX, state.searchData.length - HISTORY_MAX);
+			}
 			//在vuex 模块中，通过this.commit函数调用mutation
 			//this.commit 函数接收一个字符串为当前mutation的路径this.commit('模块名/mutation名')
 			this.commit('search/saveToStorage');

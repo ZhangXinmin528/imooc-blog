@@ -14,6 +14,16 @@ export function getDefaultText() {
  */
 export function getSearchHotList() {
 	return request({
-		url:'/search/hot-list'
+		url: '/search/hot-list'
+	});
+}
+
+/**
+ * 搜索文章列表
+ */
+export function getSearchResult(data) {
+	return request({
+		url: '/search',
+		data
 	});
 }

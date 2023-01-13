@@ -22,13 +22,16 @@
 
 		<!-- 搜索结果 -->
 		<view class="search-result-list-box" v-else>
-			<search-result-list></search-result-list>
+			<!-- 1.给mescroll-body的组件添加，ref="mescrollItem"这个是固定不变的 -->
+			<search-result-list ref="mescrollItem" :queryStr="searchVal"></search-result-list>
 		</view>
 
 	</div>
 </template>
 
 <script>
+	//2.引入mescroll-comp.js
+	import MescrollCompMixin from '@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-comp.js'
 	import MySearcher from '../../../components/my-searcher.vue'
 	import {
 		getDefaultText
@@ -49,6 +52,8 @@
 		components: {
 			MySearcher,
 		},
+		//3.注册
+		mixins: [MescrollCompMixin],
 		data() {
 			return {
 				//输入框输入内容
