@@ -1,5 +1,5 @@
 <template>
-	<view class="item-container">
+	<view class="item-container" @click="$emit('click')">
 		<view class="item-box">
 			<!-- left -->
 			<view class="item-box-left">

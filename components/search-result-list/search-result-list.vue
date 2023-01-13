@@ -6,7 +6,7 @@
 
 			<!-- 循环渲染 -->
 			<block v-for="(item,index) in resultList" :key="index">
-				<view class="search-result-item-box">
+				<view class="search-result-item-box" @click="onItemClick(item)">
 					<search-result-item-theme-1 :data="item" v-if="!item.pic_list || item.pic_list.length ===0">
 					</search-result-item-theme-1>
 
@@ -119,6 +119,12 @@
 				if (this.resultList.length === 0) {
 					this.isEmpty = true;
 				}
+			},
+			//列表item点击事件
+			onItemClick(item) {
+				uni.navigateTo({
+					url: `/subpkg/pages/blog-detail/blog-detail?author=${item.author}&articleId=${item.id}`
+				});
 			}
 
 		}

@@ -20,7 +20,7 @@
 
 					<block v-else>
 						<hot-list-item :class="'hot-list-item-'+tabIndex" v-for="(item,index) in listData[tabIndex]"
-							:key="index" :data="item" :ranking="index+1"></hot-list-item>
+							:key="index" :data="item" :ranking="index+1" @click="onItemClick(item)"></hot-list-item>
 					</block>
 
 				</view>
@@ -147,6 +147,12 @@
 							})
 							resolve(sum);
 						}).exec();
+				});
+			},
+			//列表item点击事件
+			onItemClick(item) {
+				uni.navigateTo({
+					url: `/subpkg/pages/blog-detail/blog-detail?author=${item.user_name}&articleId=${item.id}`
 				});
 			}
 		}
