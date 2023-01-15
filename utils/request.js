@@ -42,6 +42,10 @@ function request({
 			},
 			fail: (error) => {
 				reject(error)
+			},
+			//请求结束
+			complete() {
+				uni.hideLoading();
 			}
 		})
 	})
