@@ -68,6 +68,13 @@
 					"navigationBarTitleText": "文章详情",
 					"enablePullDownRefresh": false
 				}
+			},
+			{
+				"path": "pages/login-page/login-page",
+				"style": {
+					"navigationBarTitleText": "登录",
+					"enablePullDownRefresh": false
+				}
 			}
 		]
 	}]

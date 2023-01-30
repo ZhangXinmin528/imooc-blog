@@ -21,7 +21,7 @@
 					</view>
 					<view class="detail-right">
 						<!-- 关注 -->
-						<button class="follow" size="mini">关注</button>
+						<button class="follow" size="mini" @click="onFollowClick">关注</button>
 					</view>
 				</view>
 				<!-- 文章内容 -->
@@ -48,7 +48,9 @@
 	import mpHtml from '@/uni_modules/mp-html/components/mp-html/mp-html'
 	//2.引入mescroll-comp.js
 	import MescrollCompMixin from '@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-comp.js'
-
+	import {
+		mapActions
+	} from 'vuex';
 	export default {
 		components: {
 			mpHtml
@@ -72,6 +74,7 @@
 			this.loadArticleDetail();
 		},
 		methods: {
+			...mapActions('user', ['isLogin']),
 			//为所有的dom增加类名
 			addClassFromHtml(info) {
 
@@ -116,6 +119,16 @@
 				this.articleData = res.data;
 
 				// console.log(this.articleData);
+			},
+			//关注
+			async onFollowClick() {
+				const isLogin = await this.isLogin();
+				if (!isLogin) {
+					//用户未登录
+					return;
+				}
+				
+				
 			}
 		},
 	}
