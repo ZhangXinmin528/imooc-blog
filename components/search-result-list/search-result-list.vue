@@ -66,7 +66,7 @@
 			//4.回调方法
 			//首次加载
 			async mescrollInit() {
-				console.log('首次加载');
+				// console.log('首次加载');
 				await this.loadSearchResult();
 				this.isInit = false;
 				//首次加载完成，关闭上拉加载更多动画；
@@ -78,7 +78,7 @@
 
 				if (this.isInit)
 					return;
-				console.log('下拉刷新回调');
+				// console.log('下拉刷新回调');
 				this.page = 1;
 				await this.loadSearchResult();
 				//endSuccess表示数据加载完成，动画关闭
@@ -122,6 +122,7 @@
 			},
 			//列表item点击事件
 			onItemClick(item) {
+				// console.log(item);
 				uni.navigateTo({
 					url: `/subpkg/pages/blog-detail/blog-detail?author=${item.author}&articleId=${item.id}`
 				});

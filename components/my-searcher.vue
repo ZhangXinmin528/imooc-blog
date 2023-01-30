@@ -8,9 +8,10 @@
 			<uni-icons slot="clearIcon" type="clear" color="#999999"></uni-icons>
 		</uni-search-bar>
 
-		<view class="my-search-box" v-else>
-			<image class="icon" src="../static/images/search.png" />
-			<text class="placeholder">{{placeholderText}}</text>
+		<view class="my-search-box" v-else :style="{
+			height:config.height+'px', backgroundColor:config.backgroundColor, border:config.border }">
+			<image class="icon" :src="config.icon" />
+			<text class="placeholder" :style="{color:config.textColor}">{{placeholderText}}</text>
 		</view>
 	</view>
 </template>

@@ -1,34 +1,43 @@
 <template>
-	<view class="detail-container">
-		<!-- 文章内容区 -->
-		<block v-if="articleData">
-			<!-- 标题 -->
-			<view class="title">{{articleData.title}}</view>
-			<!-- 作者信息 -->
-			<view class="detail-info">
-				<view class="detail-left">
-					<view class="avatar-box">
-						<!-- 头像 -->
-						<image class="avatar" :src="articleData.avatar"></image>
+	<page-meta root-font-size="52px">
+		<view class="detail-container">
+			<!-- 文章内容区 -->
+			<block v-if="articleData">
+				<!-- 标题 -->
+				<view class="title">{{articleData.title}}</view>
+				<!-- 作者信息 -->
+				<view class="detail-info">
+					<view class="detail-left">
+						<view class="avatar-box">
+							<!-- 头像 -->
+							<image class="avatar" :src="articleData.avatar"></image>
+						</view>
+						<view class="author-box">
+							<!-- 作者 -->
+							<text class="author">{{articleData.nickName}}</text>
+							<!-- 发布时间 -->
+							<text class="release-time">{{articleData.date}}</text>
+						</view>
 					</view>
-					<view class="author-box">
-						<!-- 作者 -->
-						<text class="author">{{articleData.nickName}}</text>
-						<!-- 发布时间 -->
-						<text class="release-time">{{articleData.date}}</text>
+					<view class="detail-right">
+						<!-- 关注 -->
+						<button class="follow" size="mini">关注</button>
 					</view>
 				</view>
-				<view class="detail-right">
-					<!-- 关注 -->
-					<button class="follow" size="mini">关注</button>
+				<!-- 文章内容 -->
+				<!-- <rich-text :nodes="articleData.content"></rich-text> -->
+				<!-- 使用mphtml代替rich-text -->
+				<mp-html class="markdown_views" :content="addClassFromHtml(articleData.content)" scroll-table></mp-html>
+				<!-- 评论列表 -->
+				<view class="comment-box">
+					<!-- 1.给mescroll-body的组件添加，ref="mescrollItem"这个是固定不变的 -->
+					<article-comment-list ref="mescrollItem" :articleId="articleId"></article-comment-list>
 				</view>
-			</view>
-			<!-- 文章内容 -->
-			<!-- <rich-text :nodes="articleData.content"></rich-text> -->
-			<!-- 使用mphtml代替rich-text -->
-			<mp-html class="markdown_views" :content="addClassFromHtml(articleData.content)" scroll-table></mp-html>
-		</block>
-	</view>
+			</block>
+			<!-- 底部功能区 -->
+			<article-operate></article-operate>
+		</view>
+	</page-meta>
 </template>
 
 <script>
@@ -37,11 +46,15 @@
 	} from '../../../api/article.js'
 	//导入组件
 	import mpHtml from '@/uni_modules/mp-html/components/mp-html/mp-html'
+	//2.引入mescroll-comp.js
+	import MescrollCompMixin from '@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-comp.js'
 
 	export default {
 		components: {
 			mpHtml
 		},
+		//3.注册
+		mixins: [MescrollCompMixin],
 		data() {
 			return {
 				//作者
@@ -113,7 +126,7 @@
 
 	.detail-container {
 		padding: $uni-spacing-col-base $uni-spacing-row-base;
-
+		padding-bottom: 68px;
 	}
 
 	.title {

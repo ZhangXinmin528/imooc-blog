@@ -151,8 +151,9 @@
 			},
 			//列表item点击事件
 			onItemClick(item) {
+				// console.log(item);
 				uni.navigateTo({
-					url: `/subpkg/pages/blog-detail/blog-detail?author=${item.user_name}&articleId=${item.id}`
+					url: `/subpkg/pages/blog-detail/blog-detail?author=${item.user_name}&articleId=${item._id}`
 				});
 			}
 		}
