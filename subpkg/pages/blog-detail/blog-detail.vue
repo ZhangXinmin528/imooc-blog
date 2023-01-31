@@ -21,7 +21,9 @@
 					</view>
 					<view class="detail-right">
 						<!-- 关注 -->
-						<button class="follow" size="mini" @click="onFollowClick">关注</button>
+						<button class="follow" size="mini" :type="articleData.isFollow ? 'primary':'default'"
+							:loading="isFollowLoading"
+							@click="onFollowClick">{{articleData.isFollow?'已关注':'关注'}}</button>
 					</view>
 				</view>
 				<!-- 文章内容 -->
@@ -35,7 +37,12 @@
 				</view>
 			</block>
 			<!-- 底部功能区 -->
-			<article-operate></article-operate>
+			<article-operate :articleData="articleData" @commitClick="onCommitClick" @changePraise="onChangePraise"
+				@changeCollect="onChangeCollect"></article-operate>
+			<!-- 输入评论的popup -->
+			<uni-popup ref="popup" type="bottom" @change="onCommitPopupChange">
+				<article-comment-commit v-if="isShowCommit" :articleId="articleId" @success="onSendSuccess" />
+			</uni-popup>
 		</view>
 	</page-meta>
 </template>
@@ -43,7 +50,11 @@
 <script>
 	import {
 		getArticleDetail
-	} from '../../../api/article.js'
+	} from 'api/article'
+	import {
+		userFollow
+	} from 'api/user'
+
 	//导入组件
 	import mpHtml from '@/uni_modules/mp-html/components/mp-html/mp-html'
 	//2.引入mescroll-comp.js
@@ -51,6 +62,7 @@
 	import {
 		mapActions
 	} from 'vuex';
+
 	export default {
 		components: {
 			mpHtml
@@ -64,7 +76,11 @@
 				//文章Id
 				articleId: '',
 				//文章详情数据
-				articleData: null
+				articleData: null,
+				//关注用户loading
+				isFollowLoading: false,
+				//popup的显示状态
+				isShowCommit: false
 			};
 		},
 		onLoad(options) {
@@ -127,8 +143,55 @@
 					//用户未登录
 					return;
 				}
-				
-				
+
+				//关注用户接口
+				this.isFollowLoading = true;
+				const res = await userFollow({
+					author: this.author,
+					isFollow: !this.articleData.isFollow
+				});
+				//修改用户数据
+				this.articleData.isFollow = !this.articleData.isFollow;
+				//关闭loading
+				this.isFollowLoading = false;
+			},
+			//点击发表评论
+			onCommitClick() {
+				//打开弹窗
+				this.$refs.popup.open();
+			},
+			//发布评论的popup切换事件
+			onCommitPopupChange(e) {
+
+				// console.log(e);
+				//修改对应的标记，当popup关闭的时候，为了动画的平顺，进行延迟处理
+				if (e.show) {
+					this.isShowCommit = e.show;
+				} else {
+					setTimeout(() => {
+						this.isShowCommit = e.show;
+					}, 200);
+				}
+			},
+			//评论发送成功
+			onSendSuccess(data) {
+				this.$refs.popup.close();
+				this.isShowCommit = false;
+				console.log("onSendSuccess:" + data);
+				//添加新增评论
+				this.$refs.mescrollItem.addCommentList(data);
+			},
+			/**
+			 * 点赞处理回调
+			 */
+			onChangePraise(isPraise) {
+				this.articleData.isPraise = isPraise;
+			},
+			/**
+			 * 收藏处理回调
+			 */
+			onChangeCollect(isCollect) {
+				this.articleData.isCollect = isCollect;
 			}
 		},
 	}

@@ -1,7 +1,7 @@
 <template>
 	<view class="operate-container">
 		<!-- 输入框 -->
-		<view class="comment-box">
+		<view class="comment-box" @click="onCommitClick">
 			<my-searcher placeholderText="评论一句,前排打call..." :config="{
 				height:28,
 				backgroundColor:'#eeedf4',
@@ -12,26 +12,48 @@
 		</view>
 		<!-- 点赞 -->
 		<view class="options-box">
-			<article-praise></article-praise>
+			<article-praise :articleData="articleData" @changePraise="$emit('changePraise', $event)"></article-praise>
 		</view>
 		<!-- 收藏 -->
 		<view class="options-box">
-			<article-collect></article-collect>
+			<article-collect :articleData="articleData" @changeCollect="$emit('changeCollect', $event)"></article-collect>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		mapActions
+	} from "vuex";
 	import MySearcher from '../../components/my-searcher.vue'
 	export default {
 		name: "article-operate",
 		components: {
 			MySearcher,
 		},
+		props: {
+		  articleData: {
+		    type: Object,
+		    required: true
+		  }
+		},
 		data() {
 			return {
 
 			};
+		},
+		methods: {
+			...mapActions('user', ['isLogin']),
+			//输入框点击事件
+			async onCommitClick() {
+				//首先判断用户登录状态
+				const isLogin = await this.isLogin();
+				if (!isLogin) {
+					return;
+				}
+
+				this.$emit('commitClick');
+			}
 		}
 	}
 </script>

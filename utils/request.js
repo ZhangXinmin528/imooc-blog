@@ -1,3 +1,4 @@
+import store from '../store';
 //封装网络请求
 const BASE_URL = "https://mock.mengxuegu.com/mock/63ac0a94fef1752f04c0030b";
 
@@ -17,7 +18,7 @@ function request({
 			data,
 			method,
 			header: {
-				// Authorization: store.state.user.token
+				Authorization: store.state.user.token
 			},
 			sslVerify: true,
 			success: ({

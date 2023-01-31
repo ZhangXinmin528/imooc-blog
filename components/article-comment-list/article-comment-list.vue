@@ -3,7 +3,7 @@
 		<view class="comment-title">精简评论</view>
 		<block v-for="(item,index) in commentList.slice(0,2)" :key="index">
 			<!-- item项 -->
-			<article-comment-item :data="item.info"></article-comment-item>
+			<article-comment-item :data="item"></article-comment-item>
 		</block>
 		<!-- 查看更多 -->
 		<view class="show-more" @click="onMoreClick">查看更多评论</view>
@@ -17,10 +17,8 @@
 			<view class="comment-title">全部评论</view>
 			<block v-for="(item,index) in commentList" :key="index">
 				<!-- item项 -->
-				<article-comment-item :data="item.info"></article-comment-item>
+				<article-comment-item :data="item"></article-comment-item>
 			</block>
-			<!-- 查看更多 -->
-			<!-- <view class="show-more" @click="onMoreClick">查看更多评论</view> -->
 		</mescroll-body>
 	</view>
 </template>
@@ -117,6 +115,10 @@
 					this.mescroll = this.$refs.mescrollRef.mescroll;
 				}
 				return this.mescroll;
+			},
+			//添加新增评论项
+			addCommentList(data) {
+				this.commentList.unshift(data);
 			}
 		}
 	}
