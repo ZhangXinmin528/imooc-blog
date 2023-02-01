@@ -2,7 +2,7 @@
 	<view class="operate-container">
 		<!-- 输入框 -->
 		<view class="comment-box" @click="onCommitClick">
-			<my-searcher placeholderText="评论一句,前排打call..." :config="{
+			<my-searcher :placeholderText="placeholderText" :config="{
 				height:28,
 				backgroundColor:'#eeedf4',
 				icon:'/static/images/input-icon.png',
@@ -16,7 +16,8 @@
 		</view>
 		<!-- 收藏 -->
 		<view class="options-box">
-			<article-collect :articleData="articleData" @changeCollect="$emit('changeCollect', $event)"></article-collect>
+			<article-collect :articleData="articleData" @changeCollect="$emit('changeCollect', $event)">
+			</article-collect>
 		</view>
 	</view>
 </template>
@@ -26,16 +27,21 @@
 		mapActions
 	} from "vuex";
 	import MySearcher from '../../components/my-searcher.vue'
+
 	export default {
 		name: "article-operate",
 		components: {
 			MySearcher,
 		},
 		props: {
-		  articleData: {
-		    type: Object,
-		    required: true
-		  }
+			articleData: {
+				type: Object,
+				required: true
+			},
+			placeholderText: {
+				type: String,
+				default: '评论一句,前排打call...'
+			}
 		},
 		data() {
 			return {
