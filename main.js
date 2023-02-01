@@ -7,6 +7,8 @@ import Vue from 'vue'
 import store from './store'
 //引入公共样式
 import './styles/global.scss';
+//引入文章详情样式
+import './styles/article-detail.scss';
 
 //注册过滤器最佳实践代码
 import * as filters from './filters';

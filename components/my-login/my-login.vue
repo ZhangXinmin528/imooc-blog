@@ -6,7 +6,13 @@
 			<view class="login-desc">
 				登陆后可同步数据
 			</view>
+			<!-- #ifdef MP-WEIXIN -->
 			<button class="login-btn" type="primary" @click="getUserInfo">微信用户一键登录</button>
+			<!-- #endif -->
+
+			<!-- #ifndef MP-WEIXIN -->
+			<button class="login-btn" type="primary" @click="onAutoLogin">一键登录</button>
+			<!-- #endif -->
 		</block>
 		<!-- 用户已登录 -->
 		<block v-else>
@@ -76,6 +82,31 @@
 						}
 					}
 				})
+			},
+			//非微信小程序一键登录
+			//此处为模拟数据，方便就行开发调试；真是业务场景可以通过正常的注册以及登录逻辑进行处理
+			async onAutoLogin() {
+				// 展示加载框
+				uni.showLoading({
+					title: '加载中'
+				});
+				await this.login({
+					encryptedData: 'BmGEMqpGI5w',
+					errMsg: 'getUserProfile:ok',
+					iv: 'c+NbINO4CuEWCBYGG2FxWw==',
+					rawData: '{"nickName":"小慕同学","gender":1,"language":"zh_CN","city":"","province":"","country":"China","avatarUrl":"https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png"}',
+					signature: '449a10f11998daf680fe546a5176e6e2973516ce',
+					userInfo: {
+						nickName: '小慕同学',
+						gender: 1,
+						language: 'zh_CN',
+						city: '',
+						province: ''
+					}
+				});
+				this.$emit('onLoginSuccess');
+				// 隐藏loading
+				uni.hideLoading();
 			}
 		}
 	}

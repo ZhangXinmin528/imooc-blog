@@ -225,4 +225,16 @@
 		position: absolute;
 		bottom: 0;
 	}
+
+	/* #ifdef H5 */
+	/*隐藏滚动条*/
+	/deep/.uni-scroll-view::-webkit-scrollbar {
+		display: none;
+	}
+
+	/deep/.uni-scroll-view {
+		scrollbar-width: none;
+	}
+
+	/* #endif */
 </style>

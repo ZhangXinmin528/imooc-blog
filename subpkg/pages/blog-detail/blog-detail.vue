@@ -1,5 +1,7 @@
 <template>
+	<!-- #ifndef H5 -->
 	<page-meta root-font-size="52px">
+		<!-- #endif -->
 		<view class="detail-container">
 			<!-- 文章内容区 -->
 			<block v-if="articleData">
@@ -44,7 +46,9 @@
 				<article-comment-commit v-if="isShowCommit" :articleId="articleId" @success="onSendSuccess" />
 			</uni-popup>
 		</view>
+		<!-- #ifndef H5 -->
 	</page-meta>
+	<!-- #endif -->
 </template>
 
 <script>
@@ -198,7 +202,8 @@
 </script>
 
 <style lang="scss">
-	@import '~@/styles/article-detail.scss';
+	//在H5端无法正常导入
+	// @import '~@/styles/article-detail.scss';
 
 	.detail-container {
 		padding: $uni-spacing-col-base $uni-spacing-row-base;
